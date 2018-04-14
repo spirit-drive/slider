@@ -1,12 +1,10 @@
 let sliderImages = {
-    create ({sliderImagesElem, baseSlider, rightClass, leftClass, duration = 3000}) {
+    create ({sliderImagesElem, baseSlider, duration = 3000}) {
         this.elem = sliderImagesElem;
         this.children = this.elem.children;
         this.widthScroll = myLib.getScrollWidth();
         this.state = baseSlider.state.current;
         this.zIndex = 0;
-        this.rightClass = rightClass;
-        this.leftClass = leftClass;
         this.duration = duration;
 
         this.init ();

@@ -43,8 +43,6 @@
         sliderImages.create({
             sliderImagesElem,
             baseSlider,
-            rightClass: 'main-screen-home__images-wrapper_rightward',
-            leftClass: 'main-screen-home__images-wrapper_leftward',
             duration: 1500,
         });
 

@@ -13,11 +13,20 @@ let sliderButtons = {
         this.pointer = pointerElem;
         this.canvas = canvasElem;
         this.buttonsElem = buttonsElem;
-        this.canvasParam = {
-            strokeStyle: canvasParam.strokeStyle || '#ffffff',
-            lineWidth: canvasParam.lineWidth || 2,
-            radius: canvasParam.radius || 14,
-        };
+
+        let defaultStrokeStyle = '#ffffff';
+        let defaultLineWidth = 2;
+        let defaultRadius = 14;
+        this.canvasParam = typeof canvasParam === 'object' ?
+            {
+                strokeStyle: canvasParam.strokeStyle || defaultStrokeStyle,
+                lineWidth: canvasParam.lineWidth || defaultLineWidth,
+                radius: canvasParam.radius || defaultRadius,
+            } : {
+                strokeStyle: defaultStrokeStyle,
+                lineWidth: defaultLineWidth,
+                radius: defaultRadius,
+            };
 
         this.getCoordinatesButtons();
         this.initCanvas ();
