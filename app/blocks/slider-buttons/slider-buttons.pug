@@ -1,0 +1,9 @@
+mixin slider-buttons(count, cls, isHorizontal, isActiveFirstElem)
+    - var className = cls + (cls && ' ') + (isHorizontal ? 'slider-buttons_horizontal' : '')
+    .slider-buttons(class = className)
+        .slider-buttons__pointer
+        canvas.slider-buttons__canvas
+        ul.slider-buttons__list
+            -for (var i = 0; i < count; ++i)
+                li.slider-buttons__item(class= !i && 'slider-buttons__item_current')
+                    .slider-buttons__button

@@ -1,0 +1,62 @@
+.slider-buttons
+  position: relative
+  display: inline-block
+  font-size: 0
+
+  &__pointer
+    position: absolute
+    top: 10px
+    left: 10px
+    z-index: 3
+    display: inline-block
+    +square(10px)
+    border-radius: 50%
+    background: $accent-color
+    transition: all $delay
+
+  &__canvas
+    position: absolute
+    display: inline-block
+    +square(30px)
+
+
+  &__list
+    display: inline-block
+
+  &_horizontal
+    white-space: nowrap
+    .slider-buttons
+      &__item
+        display: inline-block
+        margin-bottom: 0
+
+        + .slider-buttons
+          &__item
+            margin-left: 20px
+
+  &__item
+    position: relative
+    +square(30px)
+    line-height: 30px
+    border-radius: 50%
+    margin-bottom: 20px
+    text-align: center
+    cursor: pointer
+
+    &_current
+      border: $border
+      .slider-buttons
+        &__button
+          opacity: 0
+
+    &:last-of-type
+      margin-bottom: 0
+
+  &__button
+    +absolute-center-all
+    display: inline-block
+    +square(10px)
+    border-radius: 50%
+    background: $light-color
+    transition: all $delay
+
