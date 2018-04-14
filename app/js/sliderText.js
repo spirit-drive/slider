@@ -1,25 +1,24 @@
 let sliderText = {
 
-    create ({sliderTextElem, baseSlider}) {
+    create ({sliderTextElem, startState}) {
         this.elem = sliderTextElem;
         this.children = this.elem.children;
-        this.timeOut = 0;
-        this.toActionForAll(baseSlider.state.current,  0, 0);
+        this.toActionForAll(startState);
 
     },
 
-    show(i) {
-        myLib.fadeIn(this.children[i]);
+    show(elem) {
+        myLib.fadeIn(elem);
     },
 
-    hide(i) {
-        myLib.fadeOut(this.children[i]);
+    hide(elem) {
+        myLib.fadeOut(elem);
     },
 
-    toActionForAll (state, timeOutShow, timeOutHide) {
+    toActionForAll (state) {
         let i = this.children.length;
         while ( i-- ) {
-            state === i ? this.show(i, timeOutShow) : this.hide(i, timeOutHide);
+            state === i ? this.show(this.children[i]) : this.hide(this.children[i]);
         }
     },
 

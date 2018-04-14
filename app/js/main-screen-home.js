@@ -3,33 +3,41 @@
 
     if (mainScreenHome) {
 
-        let duration = 7000;
-
-        let sliderElem = document.querySelector('.main-screen-home__slider .slider-buttons__list');
+        let sliderButtonsElem = document.querySelector('.main-screen-home__slider .slider-buttons__list');
         let sliderImagesElem = document.getElementsByClassName('main-screen-home__images-slider')[0];
         let sliderTextElem = document.getElementsByClassName('main-screen-home__slider-text')[0];
-
-        let pointerElem = document.querySelector('.main-screen-home__slider .slider-buttons__pointer');
-        let buttonsElem = sliderElem.getElementsByClassName('slider-buttons__item');
-        let canvasElem = document.querySelector('.main-screen-home__slider .slider-buttons__canvas');
 
         let arrayOfRelatedItems = [
             sliderTextElem,
             sliderImagesElem,
-            sliderElem,
+            sliderButtonsElem,
         ];
 
-        let arrayItemStopPlayOnHover = document.getElementsByClassName('main-screen-home__slider-text')[0];
+        let arrayItemForStopPlayOnHover = document.getElementsByClassName('main-screen-home__slider-text')[0];
 
-        let baseSlider = new BigSlider(arrayOfRelatedItems, arrayItemStopPlayOnHover, '', duration);
+        let startState = 0;
+        let duration = 3000;
+        let isReverse = false;
+
+        let baseSlider = new BigSlider(arrayOfRelatedItems, arrayItemForStopPlayOnHover, startState, duration, isReverse);
+
+        let pointerElem = document.querySelector('.main-screen-home__slider .slider-buttons__pointer');
+        let buttonsElem = sliderButtonsElem.getElementsByClassName('slider-buttons__item');
+        let canvasElem = document.querySelector('.main-screen-home__slider .slider-buttons__canvas');
+        let canvasParam = {
+            strokeStyle: '#ffffff',
+            lineWidth: 2,
+            radius: 14,
+        };
 
         sliderButtons.create({
-            sliderElem,
+            sliderButtonsElem,
             activeClass: 'slider-buttons__item_current',
             pointerElem,
             canvasElem,
             baseSlider,
             buttonsElem,
+            canvasParam,
         });
 
         sliderImages.create({
@@ -37,9 +45,13 @@
             baseSlider,
             rightClass: 'main-screen-home__images-wrapper_rightward',
             leftClass: 'main-screen-home__images-wrapper_leftward',
+            duration: 1500,
         });
 
-        sliderText.create({sliderTextElem, baseSlider});
+        sliderText.create({
+            sliderTextElem,
+            startState: baseSlider.state.current,
+        });
 
         let additionalFuncForSlider = [
             sliderButtons.changeChildren.bind(sliderButtons),

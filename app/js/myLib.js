@@ -1,8 +1,5 @@
 let myLib = {
 
-    save: {},
-    timeOut: {},
-
     setClickHandler(elem, handler) {
 
         if (elem.length){

@@ -1,17 +1,23 @@
 let sliderButtons = {
 
-    create ({sliderElem, activeClass, pointerElem, canvasElem, baseSlider, buttonsElem}) {
-        this.elem = sliderElem;
+    create ({sliderButtonsElem, activeClass, pointerElem, canvasElem, baseSlider, buttonsElem, canvasParam}) {
+        this.elem = sliderButtonsElem;
         this.children = this.elem.children;
         this.baseSlider = baseSlider;
+        this.duration = this.baseSlider.interval;
+        this.animationId = 0;
+        this.state = this.baseSlider.state.current;
+
         this.coordinatesButtons = [];
         this.activeClass = activeClass;
         this.pointer = pointerElem;
         this.canvas = canvasElem;
-        this.duration = this.baseSlider.interval;
-        this.animationId = 0;
-        this.state = this.baseSlider.state.current;
         this.buttonsElem = buttonsElem;
+        this.canvasParam = {
+            strokeStyle: canvasParam.strokeStyle || '#ffffff',
+            lineWidth: canvasParam.lineWidth || 2,
+            radius: canvasParam.radius || 14,
+        };
 
         this.getCoordinatesButtons();
         this.initCanvas ();
@@ -34,8 +40,8 @@ let sliderButtons = {
 
     playCanvas () {
         this.canvasContext.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.canvasContext.strokeStyle = '#ffffff';
-        this.canvasContext.lineWidth = 2;
+        this.canvasContext.strokeStyle = this.canvasParam.strokeStyle;
+        this.canvasContext.lineWidth = this.canvasParam.lineWidth;
         let steps = this.duration / 4.8;
 
         this.draw(steps, this.canvasContext);
@@ -47,7 +53,7 @@ let sliderButtons = {
         let properRotation = 0;
         let x = this.canvas.width / 2;
         let y = this.canvas.height / 2;
-        let radius = 14;
+        let radius = this.canvasParam.radius;
         let angleStart;
         let angleFinish;
         let additionalAngle = 0;
@@ -126,6 +132,9 @@ let sliderButtons = {
             this.children[i].addEventListener('click', () => {this.onClickForButtons(i)})
         }
         this.changeChildren(this.state);
+        this.pointer.addEventListener('click', () => {
+            this.baseSlider.setState(this.state);
+        });
         window.addEventListener('resize', this.onResizeWindow.bind(this));
     },
 };

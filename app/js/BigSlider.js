@@ -1,28 +1,26 @@
 class BigSlider {
-    constructor (arrayOfRelatedItemsArrayOfHTMLElement, itemsStopPlayOnHoverArrayOfHTMLElementOrHTMLElement, stateNumber = 0, intervalNumberOrBoolean, isReverse = false) {
+    constructor (arrayOfRelatedItemsArrayOfHTMLElement, itemsForStopPlayOnHoverArrayOfHTMLElementOrHTMLElement, startStateNumber = 0, intervalNumberOrBoolean, isReverse = false) {
 
         this.relatedItems = arrayOfRelatedItemsArrayOfHTMLElement;
         this.isReverse = typeof isReverse === 'boolean' ? isReverse : false;
 
-
-        this.timeOutSetTimeStart = 0;
-
         this.state = {};
         this.state.max = this.getMaxState();
-        this.state.current = this.checkInputState(stateNumber);
+        this.state.current = this.checkInputState(startStateNumber);
+
         this.iteration = 0;
         this.animationId = 0;
 
-        this.itemsStopPlayOnHover = itemsStopPlayOnHoverArrayOfHTMLElementOrHTMLElement;
+        this.itemsForStopPlayOnHover = itemsForStopPlayOnHoverArrayOfHTMLElementOrHTMLElement;
 
         let isNumberInterval = typeof intervalNumberOrBoolean === 'number' ? intervalNumberOrBoolean : 3000;
         this.interval = intervalNumberOrBoolean === false ? intervalNumberOrBoolean : isNumberInterval;
         this.newInterval = this.interval;
+
         this.time = {
             start: 0,
             left: this.interval,
         };
-
 
         this.setEventHandlers();
         window.addEventListener('load', () => {
@@ -30,7 +28,6 @@ class BigSlider {
                 this.play();
             }, 600)
         });
-
 
     }
 
@@ -51,12 +48,12 @@ class BigSlider {
             elem.addEventListener('mouseout', this.play.bind(this));
         };
 
-        if (Array.isArray(this.itemsStopPlayOnHover)) {
-            this.itemsStopPlayOnHover.forEach(item => {
+        if (Array.isArray(this.itemsForStopPlayOnHover)) {
+            this.itemsForStopPlayOnHover.forEach(item => {
                 addStopPlayHandler(item);
             })
-        } else if (this.itemsStopPlayOnHover instanceof HTMLElement) {
-            addStopPlayHandler(this.itemsStopPlayOnHover);
+        } else if (this.itemsForStopPlayOnHover instanceof HTMLElement) {
+            addStopPlayHandler(this.itemsForStopPlayOnHover);
         }
     }
 
@@ -134,11 +131,6 @@ class BigSlider {
 
     setAnimation () {
         this.animationId = requestAnimationFrame(this.playAnimation.bind(this));
-    }
-
-    backUpIteration () {
-        let backUp = 30;
-        this.iteration = this.iteration < backUp ? backUp : this.iteration - backUp;
     }
 
     setNewInterval () {

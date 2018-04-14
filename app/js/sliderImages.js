@@ -1,5 +1,5 @@
 let sliderImages = {
-    create ({sliderImagesElem, baseSlider, rightClass, leftClass}) {
+    create ({sliderImagesElem, baseSlider, rightClass, leftClass, duration = 3000}) {
         this.elem = sliderImagesElem;
         this.children = this.elem.children;
         this.widthScroll = myLib.getScrollWidth();
@@ -7,6 +7,7 @@ let sliderImages = {
         this.zIndex = 0;
         this.rightClass = rightClass;
         this.leftClass = leftClass;
+        this.duration = duration;
 
         this.init ();
     },
@@ -16,8 +17,7 @@ let sliderImages = {
         let resultWidth;
 
         let loop = () => {
-            resultWidth = Math.pow(stepWidth * i / 30, 1.2);
-            // resultWidth = Math.pow(stepWidth * i / 4.4, 1.2);
+            resultWidth = Math.pow(stepWidth * i / 4, 1.2);
 
             if (resultWidth >= width) {
                 elem.style.width = '100%';
@@ -37,8 +37,7 @@ let sliderImages = {
         this.setVector (state, elem);
 
         elem.style.zIndex = ++this.zIndex;
-        let duration = 300;
-        let steps = duration / 20;
+        let steps = this.duration / 20;
         let width = window.innerWidth - this.widthScroll;
         let stepWidth = width / steps;
 
@@ -46,21 +45,27 @@ let sliderImages = {
 
     },
 
+    setStyleForMove (elem, isLeft) {
+        let vector = isLeft ? ['left', 'right'] : ['right', 'left'];
+        vector.forEach((prop, i) => {
+            elem.style[prop] = i ? 'auto' : 0;
+            elem.children[0].style[prop] = i ? 'auto' : 0;
+        })
+    },
+
     setLeft(elem) {
-        elem.classList.add(this.leftClass);
-        elem.classList.remove(this.rightClass);
+        this.setStyleForMove(elem, true);
     },
 
     setRight(elem) {
-        elem.classList.add(this.rightClass);
-        elem.classList.remove(this.leftClass);
+        this.setStyleForMove(elem);
     },
 
     setVector (state, elem) {
         this.state < state ? this.setLeft (elem) : this.setRight (elem);
     },
 
-    setWidthForImage () {
+    setWidthForImages () {
         let scrollWidth = window.innerHeight < window.scrollHeight ? this.widthScroll : 0;
         let width = window.innerWidth - scrollWidth;
 
@@ -92,9 +97,9 @@ let sliderImages = {
     },
 
     init () {
-        this.setWidthForImage ();
+        this.setWidthForImages ();
         this.resetZIndex (this.state);
-        window.addEventListener('resize', this.setWidthForImage.bind(this))
+        window.addEventListener('resize', this.setWidthForImages.bind(this))
     }
 
 };
