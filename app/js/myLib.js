@@ -46,7 +46,6 @@ let myLib = {
                 if (attenuation > 0) {
                     requestAnimationFrame(fadeOutEntrails);
                 } else {
-                    // this.save.displayForFadeElem = getComputedStyle(elem).display;
                     elem.style.display  = 'none';
                 }
             };
@@ -63,7 +62,6 @@ let myLib = {
             let i = 0;
 
             elem.style.opacity = 0;
-            // elem.style.display = this.save.displayForFadeElem;
             elem.style.display = 'block';
 
             let fadeInEntrails = () => {
