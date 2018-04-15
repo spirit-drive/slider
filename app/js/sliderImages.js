@@ -6,6 +6,7 @@ let sliderImages = {
         this.state = baseSlider.state.current;
         this.zIndex = 0;
         this.duration = duration;
+        this.animationId = 0;
 
         this.init ();
     },
@@ -14,6 +15,7 @@ let sliderImages = {
         let i = 0;
         let resultWidth;
 
+        cancelAnimationFrame(this.animationId);
         let loop = () => {
             resultWidth = Math.pow(stepWidth * i / 4, 1.2);
 
@@ -21,12 +23,12 @@ let sliderImages = {
                 elem.style.width = '100%';
             } else {
                 elem.style.width = `${resultWidth}px`;
-                requestAnimationFrame(loop);
+                this.animationId = requestAnimationFrame(loop);
             }
             ++i;
 
         };
-        requestAnimationFrame(loop);
+        this.animationId = requestAnimationFrame(loop);
 
     },
 
@@ -39,7 +41,7 @@ let sliderImages = {
         let width = window.innerWidth - this.widthScroll;
         let stepWidth = width / steps;
 
-        this.loop(elem, width, stepWidth)
+        this.loop(elem, width, stepWidth);
 
     },
 
