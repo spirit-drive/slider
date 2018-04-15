@@ -13,7 +13,7 @@
             sliderButtonsElem,
         ];
 
-        let arrayItemForStopPlayOnHover = document.getElementsByClassName('main-screen-home__slider-text')[0];
+        let arrayItemForStopPlayOnHover = document.getElementsByClassName('main-screen-home__bait')[0];
 
         let startState = 0;
         // let duration = false;
@@ -44,7 +44,7 @@
         sliderImages.create({
             sliderImagesElem,
             baseSlider,
-            duration: 500,
+            duration: 1000,
         });
 
         // sliderText.create({

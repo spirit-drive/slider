@@ -44,15 +44,27 @@ class BigSlider {
     setEventHandlers() {
 
         let addStopPlayHandler = (elem) => {
-            elem.addEventListener('mouseover', this.stop.bind(this));
-            elem.addEventListener('mouseout', this.play.bind(this));
+            if (elem.length) {
+
+                for (let i = 0; i < elem.length; ++i) {
+                    elem[i].addEventListener('mouseover', () => {
+                        console.log(elem[i]);
+                        this.stop();
+                    });
+                    elem[i].addEventListener('mouseout', this.play.bind(this));
+                }
+
+            } else {
+                elem.addEventListener('mouseover', this.stop.bind(this));
+                elem.addEventListener('mouseout', this.play.bind(this));
+            }
         };
 
         if (Array.isArray(this.itemsForStopPlayOnHover)) {
             this.itemsForStopPlayOnHover.forEach(item => {
                 addStopPlayHandler(item);
             })
-        } else if (this.itemsForStopPlayOnHover instanceof HTMLElement) {
+        } else {
             addStopPlayHandler(this.itemsForStopPlayOnHover);
         }
     }
