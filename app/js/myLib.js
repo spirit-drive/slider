@@ -31,22 +31,24 @@ let myLib = {
 
         if (getComputedStyle(elem).display !== 'none') {
 
-            let i = 0;
-
-            let fadeOutEntrails = () => {
-                ++i;
-                let stepOpacity = 1 / duration * 20;
-                let attenuation = duration - i * 20;
-
-                elem.style.opacity = 1 - stepOpacity * i;
-
-                if (attenuation > 0) {
-                    requestAnimationFrame(fadeOutEntrails);
-                } else {
+            // let i = 0;
+            // let animationId = 0;
+            //
+            // let fadeOutEntrails = () => {
+            //     ++i;
+            //     let stepOpacity = 1 / duration * 20;
+            //     let attenuation = duration - i * 20;
+            //
+            //     elem.style.opacity = 1 - stepOpacity * i;
+            //
+            //     if (attenuation > 0) {
+            //         animationId = requestAnimationFrame(fadeOutEntrails);
+            //     } else {
                     elem.style.display  = 'none';
-                }
-            };
-            requestAnimationFrame(fadeOutEntrails);
+            //         cancelAnimationFrame(animationId);
+            //     }
+            // };
+            // animationId = requestAnimationFrame(fadeOutEntrails);
         }
 
     },
@@ -56,23 +58,26 @@ let myLib = {
 
         if (getComputedStyle(elem).display === 'none') {
 
-            let i = 0;
-
-            elem.style.opacity = 0;
+            // let i = 0;
+            // let animationId = 0;
+            //
+            // elem.style.opacity = 0;
             elem.style.display = 'block';
-
-            let fadeInEntrails = () => {
-                ++i;
-                let stepOpacity = 1 / duration * 20;
-                let attenuation = duration - i * 20;
-
-                elem.style.opacity = stepOpacity * i;
-
-                if (attenuation > 0) {
-                    requestAnimationFrame(fadeInEntrails);
-                }
-            };
-            requestAnimationFrame(fadeInEntrails);
+            //
+            // let fadeInEntrails = () => {
+            //     ++i;
+            //     let stepOpacity = 1 / duration * 20;
+            //     let attenuation = duration - i * 20;
+            //
+            //     elem.style.opacity = stepOpacity * i;
+            //
+            //     if (attenuation > 0) {
+            //         animationId = requestAnimationFrame(fadeInEntrails);
+            //     } else {
+            //         cancelAnimationFrame(animationId);
+            //     }
+            // };
+            // animationId = requestAnimationFrame(fadeInEntrails);
 
         }
 

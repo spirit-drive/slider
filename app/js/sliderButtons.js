@@ -48,12 +48,15 @@ let sliderButtons = {
     },
 
     playCanvas () {
-        this.canvasContext.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.canvasContext.strokeStyle = this.canvasParam.strokeStyle;
-        this.canvasContext.lineWidth = this.canvasParam.lineWidth;
-        let steps = this.duration / 4.8;
 
-        this.draw(steps, this.canvasContext);
+        if (this.baseSlider.interval !== false) {
+            this.canvasContext.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            this.canvasContext.strokeStyle = this.canvasParam.strokeStyle;
+            this.canvasContext.lineWidth = this.canvasParam.lineWidth;
+            let steps = this.duration / 4.8;
+
+            this.draw(steps, this.canvasContext);
+        }
 
     },
 

@@ -133,9 +133,11 @@ li {
 
 * {
   -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box; }
   *:before, *:after {
     -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box; }
 
 *::-webkit-input-placeholder {
@@ -185,12 +187,9 @@ body {
     display: inline-block;
     width: 10px;
     height: 10px;
-    -webkit-border-radius: 50%;
-            border-radius: 50%;
+    border-radius: 50%;
     cursor: pointer;
     background: #ff6600;
-    -webkit-transition: all 0.3s;
-    -o-transition: all 0.3s;
     transition: all 0.3s; }
   .slider-buttons__canvas {
     position: absolute;
@@ -211,8 +210,7 @@ body {
     width: 30px;
     height: 30px;
     line-height: 30px;
-    -webkit-border-radius: 50%;
-            border-radius: 50%;
+    border-radius: 50%;
     margin-bottom: 20px;
     text-align: center;
     cursor: pointer; }
@@ -226,17 +224,12 @@ body {
     position: absolute;
     top: 50%;
     left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
     display: inline-block;
     width: 10px;
     height: 10px;
-    -webkit-border-radius: 50%;
-            border-radius: 50%;
+    border-radius: 50%;
     background: #fff;
-    -webkit-transition: all 0.3s;
-    -o-transition: all 0.3s;
     transition: all 0.3s; }
 
 .main-screen-home {
@@ -267,8 +260,7 @@ body {
     height: 100%;
     vertical-align: top;
     background-repeat: no-repeat;
-    -webkit-background-size: cover;
-            background-size: cover;
+    background-size: cover;
     background-position-y: center; }
     .main-screen-home__images-slide_top {
       z-index: 2; }
@@ -319,16 +311,27 @@ body {
   .main-screen-home__slider-text {
     position: relative; }
   .main-screen-home__item {
-    position: absolute;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    z-index: 5;
+    color: #fff; }
+  .main-screen-home__title {
+    margin-bottom: 26px;
+    font: 2em "OpenSans-Bold", sans-serif; }
+  .main-screen-home__text {
+    margin-bottom: 3.5rem; }
+n: relative; }
+  .main-screen-home__item {
+    position: relative;
     top: 50%;
     -webkit-transform: translateY(-50%);
         -ms-transform: translateY(-50%);
             transform: translateY(-50%);
-    display: none;
     font-size: 24px;
+    z-index: 5;
     color: #fff; }
-    .main-screen-home__item:first-of-type {
-      display: block; }
   .main-screen-home__title {
     margin-bottom: 26px;
     font: 2em "OpenSans-Bold", sans-serif; }

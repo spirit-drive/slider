@@ -8,7 +8,7 @@
         let sliderTextElem = document.getElementsByClassName('main-screen-home__slider-text')[0];
 
         let arrayOfRelatedItems = [
-            sliderTextElem,
+            // sliderTextElem,
             sliderImagesElem,
             sliderButtonsElem,
         ];
@@ -16,6 +16,7 @@
         let arrayItemForStopPlayOnHover = document.getElementsByClassName('main-screen-home__slider-text')[0];
 
         let startState = 0;
+        // let duration = false;
         let duration = 3000;
         let isReverse = false;
 
@@ -43,19 +44,19 @@
         sliderImages.create({
             sliderImagesElem,
             baseSlider,
-            duration: 1500,
+            duration: 500,
         });
 
-        sliderText.create({
-            sliderTextElem,
-            startState: baseSlider.state.current,
-        });
+        // sliderText.create({
+        //     sliderTextElem,
+        //     startState: baseSlider.state.current,
+        // });
 
         let additionalFuncForSlider = [
             sliderButtons.changeChildren.bind(sliderButtons),
             sliderButtons.playCanvas.bind(sliderButtons),
             sliderImages.changeChildren.bind(sliderImages),
-            sliderText.changeChildren.bind(sliderText),
+            // sliderText.changeChildren.bind(sliderText),
         ];
 
         baseSlider.setFuncOnLoop(additionalFuncForSlider);

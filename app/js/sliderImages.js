@@ -11,24 +11,25 @@ let sliderImages = {
         this.init ();
     },
 
-    loop (elem, width, stepWidth) {
+    loop (elem, width, stepWidth, animationId) {
         let i = 0;
         let resultWidth;
 
-        cancelAnimationFrame(this.animationId);
         let loop = () => {
             resultWidth = Math.pow(stepWidth * i / 4, 1.2);
 
             if (resultWidth >= width) {
                 elem.style.width = '100%';
+                cancelAnimationFrame(animationId);
             } else {
                 elem.style.width = `${resultWidth}px`;
-                this.animationId = requestAnimationFrame(loop);
+                animationId = requestAnimationFrame(loop);
             }
             ++i;
 
         };
-        this.animationId = requestAnimationFrame(loop);
+        animationId = requestAnimationFrame(loop);
+
 
     },
 
@@ -42,6 +43,21 @@ let sliderImages = {
         let stepWidth = width / steps;
 
         this.loop(elem, width, stepWidth);
+
+        // this.setVector (state, elem);
+        //
+        // let duration = this.duration / 1000;
+        //
+        // elem.style.transition = 'none';
+        // elem.style.width = 0;
+        // elem.style.zIndex = ++this.zIndex;
+        //
+        //
+        // setTimeout(() => {
+        //     elem.style.transition = `width ${duration}s cubic-bezier(0.47, 0, 0.745, 0.715)`;
+        //     elem.style.width = '100%';
+        // }, 50);
+
 
     },
 

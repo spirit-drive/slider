@@ -1,11 +1,74 @@
 mixin main-screen-home()
     .main-screen-home
         .main-screen-home__images-slider
-             -for (var i = 0; i < 5; ++i)
-                 .main-screen-home__images-wrapper
-                     .main-screen-home__images-slide(class = !i && 'main-screen-home__images-slide_top' style="background-image: url('./img/main-screen-slider_" + (i + 1) + ".jpg')")
+             .main-screen-home__images-wrapper
+                 .main-screen-home__images-slide.main-screen-home__images-slide_top( style="background-image: url('./img/main-screen-slider_1.jpg')")
+                         .main-screen-home__overlay
 
-        .main-screen-home__overlay
+                         .main-screen-home__item.frame.main-screen-home__main
+                             h1.main-screen-home__title.
+                                 Международные перевозки
+                             p.main-screen-home__text.
+                                 Мы разрабатываем лучшие решения
+                                 для перевозки груза для наших клиентов.
+
+             .main-screen-home__images-wrapper
+                 .main-screen-home__images-slide( style="background-image: url('./img/main-screen-slider_2.jpg')")
+                         .main-screen-home__overlay
+
+                         .main-screen-home__item.frame.main-screen-home__main
+                            h1.main-screen-home__title.
+                                Нам доверяют всё больше
+                            p.
+                                Импорт контейнеров за 2017-2018 года вырос в 2 раза.
+                            p.main-screen-home__text.
+                                А количество контейнеров экспортированных нами за 2017 год
+                                возросло на 147% в сравнении с предыдущими годами.
+
+             .main-screen-home__images-wrapper
+                 .main-screen-home__images-slide( style="background-image: url('./img/main-screen-slider_3.jpg')")
+                         .main-screen-home__overlay
+
+                         .main-screen-home__item.frame.main-screen-home__main
+                             h1.main-screen-home__title.
+                                 Начните с нами работать
+                             p.
+                                 И вы останетесь с нами навсегда.
+
+                             p.main-screen-home__text.
+                                 В любой момент мы можем предоставить независимую
+                                 экспертизу нашей работы.
+
+             .main-screen-home__images-wrapper
+                 .main-screen-home__images-slide( style="background-image: url('./img/main-screen-slider_4.jpg')")
+                         .main-screen-home__overlay
+
+                         .main-screen-home__item.frame.main-screen-home__main
+                             h1.main-screen-home__title.
+                                 Кончайте с нами работать
+                             p.
+                                 По правде сказать нам надоели такие мудаки, как вы.
+
+                             p.main-screen-home__text.
+                                 В любой момент мы можем предоставить независимую
+                                 экспертизу нашей работы.
+
+             .main-screen-home__images-wrapper
+                 .main-screen-home__images-slide( style="background-image: url('./img/main-screen-slider_5.jpg')")
+                         .main-screen-home__overlay
+
+                         .main-screen-home__item.frame.main-screen-home__main
+                             h1.main-screen-home__title.
+                                 Забудьте наш номер
+                             p.
+                                 И не приходите больше
+
+                             p.main-screen-home__text.
+                                 В любой момент мы можем предоставить независимую
+                                 экспертизу нашей работы.
+
+
+
 
         .main-screen-home__content
             .main-screen-home__wrapper
@@ -13,53 +76,6 @@ mixin main-screen-home()
                 .main-screen-home__container.frame
 
                     .main-screen-home__main
-
-                        .main-screen-home__slider-text
-
-                            .main-screen-home__item
-                                h1.main-screen-home__title.
-                                    Международные перевозки
-                                p.main-screen-home__text.
-                                    Мы разрабатываем лучшие решения
-                                    для перевозки груза для наших клиентов.
-                            .main-screen-home__item
-                                h1.main-screen-home__title.
-                                    Нам доверяют всё больше
-                                p.
-                                    Импорт контейнеров за 2017-2018 года вырос в 2 раза.
-                                p.main-screen-home__text.
-                                    А количество контейнеров экспортированных нами за 2017 год
-                                    возросло на 147% в сравнении с предыдущими годами.
-
-                            .main-screen-home__item
-                                h1.main-screen-home__title.
-                                    Начните с нами работать
-                                p.
-                                    И вы останетесь с нами навсегда.
-
-                                p.main-screen-home__text.
-                                    В любой момент мы можем предоставить независимую
-                                    экспертизу нашей работы.
-
-                            .main-screen-home__item
-                                h1.main-screen-home__title.
-                                    Кончайте с нами работать
-                                p.
-                                    По правде сказать нам надоели такие мудаки, как вы.
-
-                                p.main-screen-home__text.
-                                    В любой момент мы можем предоставить независимую
-                                    экспертизу нашей работы.
-
-                            .main-screen-home__item
-                                h1.main-screen-home__title.
-                                    Забудьте наш номер
-                                p.
-                                    И не приходите больше
-
-                                p.main-screen-home__text.
-                                    В любой момент мы можем предоставить независимую
-                                    экспертизу нашей работы.
 
                     .main-screen-home__wrapper-slider-buttons
                         +slider-buttons(5, 'main-screen-home__slider')

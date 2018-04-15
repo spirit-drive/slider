@@ -86,13 +86,12 @@
 
 
   &__item
-    +absolute-center-y
-    display: none
+    position: relative
+    top: 50%
+    transform: translateY(-50%)
     font-size: 24px
+    z-index: 5
     color: $light-color
-
-    &:first-of-type
-      display: block
 
   &__title
     margin-bottom: 26px
