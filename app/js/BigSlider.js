@@ -1,12 +1,41 @@
+/*
+* Слайдер имеет свое внутренее состояние, которое равно текущему слайду.
+*
+* Данное состояние можно получить с помощью: BigSlider.state.current
+*
+* Можно установить нужное состояние (нужный номер слайда) с помощью: BigSlider.setState(newState)
+*
+* Можно перелистывать слайдер с помощью методов: BigSlider.next() BigSlider.back()
+*
+* Слайдер имеет внутреннюю анимацию, которая обнуляется при каждом перелистывании.
+*
+* Получить значение текущей анимации можно с помощью: BigSlider.iteration
+*
+* С помощью метода BigSlider.setFuncOnLoop(Массив функций или функция) можно добавлять функции,
+* которые будут выполняться при перелистывании слайдера
+*
+* Параметр arrayOfRelatedItemsArrayOfHTMLElement принимает контейнеры элементов слайдера, например контейнер картинок слайдера, контейнер кнопок слайдера.
+* По данному параметру вычисляется количество слайдов в слайдере (максимальное состояние)
+*
+* Параметр itemsForStopPlayOnHoverArrayOfHTMLElementOrHTMLElement - это те элементы, при навереднии на которые слайдер будеи приостанавливаться
+*
+* Параметр startStateNumber - это начальное значение слайдера
+*
+* Параметр intervalNumberOrBoolean - это интервал слайдера, если поставить false - слайдер не будер перелистываться, а внутренняя анимация не запустится
+*
+* Параметр isReverse - если true, но будет в обратном направлении
+*/
+
 class BigSlider {
-    constructor (arrayOfRelatedItemsArrayOfHTMLElement, itemsForStopPlayOnHoverArrayOfHTMLElementOrHTMLElement, startStateNumber = 0, intervalNumberOrBoolean, isReverse = false) {
+    constructor (arrayOfRelatedItemsArrayOfHTMLElement, itemsForStopPlayOnHoverArrayOfHTMLElementOrHTMLElement, startStateNumber, intervalNumberOrBoolean, isReverse = false) {
 
         this.relatedItems = arrayOfRelatedItemsArrayOfHTMLElement;
-        this.isReverse = typeof isReverse === 'boolean' ? isReverse : false;
+
+        this.isReverse = isReverse;
 
         this.state = {};
         this.state.max = this.getMaxState();
-        this.state.current = this.checkInputState(startStateNumber);
+        this.state.current = parseInt(this.checkInputState(startStateNumber), 10) || 0;
 
         this.iteration = 0;
         this.animationId = 0;
@@ -35,8 +64,8 @@ class BigSlider {
         return !inputState || inputState > this.state.max || inputState < 0 ? 0 : inputState;
     }
 
-    setState(valueNumber) {
-        this.state.current = this.checkInputState(valueNumber);
+    setState(newState) {
+        this.state.current = this.checkInputState(newState);
         this.additionalFuncOnPlay(this.state.current);
         this.play();
     }
@@ -44,19 +73,16 @@ class BigSlider {
     setEventHandlers() {
 
         let addStopPlayHandler = (elem) => {
-            if (elem.length) {
-
-                for (let i = 0; i < elem.length; ++i) {
-                    elem[i].addEventListener('mouseover', () => {
-                        console.log(elem[i]);
-                        this.stop();
-                    });
-                    elem[i].addEventListener('mouseout', this.play.bind(this));
+            if (elem) {
+                if (elem.length) {
+                    for (let i = 0; i < elem.length; ++i) {
+                        elem[i].addEventListener('mouseover', this.pause.bind(this));
+                        elem[i].addEventListener('mouseout', this.play.bind(this));
+                    }
+                } else {
+                    elem.addEventListener('mouseover', this.pause.bind(this));
+                    elem.addEventListener('mouseout', this.play.bind(this));
                 }
-
-            } else {
-                elem.addEventListener('mouseover', this.stop.bind(this));
-                elem.addEventListener('mouseout', this.play.bind(this));
             }
         };
 
@@ -99,7 +125,6 @@ class BigSlider {
     next() {
         this.incrementState();
         this.additionalFuncOnPlay(this.state.current);
-
     }
 
     back() {
@@ -132,11 +157,6 @@ class BigSlider {
         }
     }
 
-    playAnimation () {
-        ++this.iteration;
-        this.animationId = requestAnimationFrame(this.playAnimation.bind(this))
-    }
-
     toResetAnimation() {
         this.iteration = 0;
     }
@@ -145,8 +165,12 @@ class BigSlider {
         this.animationId = requestAnimationFrame(this.playAnimation.bind(this));
     }
 
-    setNewInterval () {
+    playAnimation () {
+        ++this.iteration;
+        this.animationId = requestAnimationFrame(this.playAnimation.bind(this))
+    }
 
+    setNewInterval () {
         this.time.left -= Date.now() - this.time.start;
         this.newInterval = this.time.left > this.interval || this.time.left < 0 ? this.interval : this.time.left;
     }
@@ -191,7 +215,7 @@ class BigSlider {
         cancelAnimationFrame(this.animationId);
     }
 
-    stop() {
+    pause() {
         this.setNewInterval ();
         clearInterval(this.intervalId);
         this.stopAnimation ();

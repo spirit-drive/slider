@@ -32,31 +32,31 @@ let sliderButtons = {
         this.initCanvas ();
         this.init();
 
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                this.playCanvas();
-            }, 600)
-        });
+        if (this.canvas) {
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    this.playCanvas();
+                }, 600)
+            });
+        }
 
     },
 
     initCanvas () {
-        this.canvas.width = parseInt(getComputedStyle(this.canvas).width.slice(0, -2), 10);
-        this.canvas.height = parseInt(getComputedStyle(this.canvas).height.slice(0, -2), 10);
-        this.canvasContext = this.canvas.getContext('2d');
-
+        if (this.canvas) {
+            this.canvas.width = parseInt(getComputedStyle(this.canvas).width.slice(0, -2), 10);
+            this.canvas.height = parseInt(getComputedStyle(this.canvas).height.slice(0, -2), 10);
+            this.canvasContext = this.canvas.getContext('2d');
+        }
     },
 
     playCanvas () {
+        this.canvasContext.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.canvasContext.strokeStyle = this.canvasParam.strokeStyle;
+        this.canvasContext.lineWidth = this.canvasParam.lineWidth;
+        let steps = this.duration / 4.8;
 
-        if (this.baseSlider.interval !== false) {
-            this.canvasContext.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            this.canvasContext.strokeStyle = this.canvasParam.strokeStyle;
-            this.canvasContext.lineWidth = this.canvasParam.lineWidth;
-            let steps = this.duration / 4.8;
-
-            this.draw(steps, this.canvasContext);
-        }
+        this.draw(steps, this.canvasContext);
 
     },
 
@@ -118,7 +118,9 @@ let sliderButtons = {
         let x = this.coordinatesButtons[this.state].x;
         let y = this.coordinatesButtons[this.state].y;
         this.pointer.style.transform = `translate(${x}px, ${y}px)`;
-        this.canvas.style.transform = `translate(${x}px, ${y}px)`;
+        if (this.canvas) {
+            this.canvas.style.transform = `translate(${x}px, ${y}px)`;
+        }
     },
 
     changeChildren(state) {

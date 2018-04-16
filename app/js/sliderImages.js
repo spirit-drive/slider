@@ -11,9 +11,10 @@ let sliderImages = {
         this.init ();
     },
 
-    loop (elem, width, stepWidth, animationId) {
+    loop (elem, width, stepWidth) {
         let i = 0;
         let resultWidth;
+        let animationId;
 
         let loop = () => {
             resultWidth = Math.pow(stepWidth * i / 4, 1.2);
@@ -35,28 +36,28 @@ let sliderImages = {
 
     toTurnSlide (state, elem) {
 
-        this.setVector (state, elem);
-
-        elem.style.zIndex = ++this.zIndex;
-        let steps = this.duration / 20;
-        let width = window.innerWidth - this.widthScroll;
-        let stepWidth = width / steps;
-
-        this.loop(elem, width, stepWidth);
-
         // this.setVector (state, elem);
         //
-        // let duration = this.duration / 1000;
-        //
-        // elem.style.transition = 'none';
-        // elem.style.width = 0;
         // elem.style.zIndex = ++this.zIndex;
+        // let steps = this.duration / 20;
+        // let width = window.innerWidth - this.widthScroll;
+        // let stepWidth = width / steps;
         //
-        //
-        // setTimeout(() => {
-        //     elem.style.transition = `width ${duration}s cubic-bezier(0.47, 0, 0.745, 0.715)`;
-        //     elem.style.width = '100%';
-        // }, 50);
+        // this.loop(elem, width, stepWidth);
+
+        this.setVector (state, elem);
+
+        let duration = this.duration / 1000;
+
+        elem.style.transition = 'none';
+        elem.style.width = 0;
+        elem.style.zIndex = ++this.zIndex;
+
+
+        setTimeout(() => {
+            elem.style.transition = `width ${duration}s cubic-bezier(0.47, 0, 0.745, 0.715)`;
+            elem.style.width = '100%';
+        }, 50);
 
 
     },
